@@ -1,0 +1,24 @@
+{
+  "name": "leet9",
+  "version": "1.0.0",
+  "description": "Leet 9 gaming dashboard",
+  "main": "server.js",
+  "scripts": {
+    "server": "nodemon server.js"
+  },
+  "author": "leet 9 dev team",
+  "license": "ISC",
+  "dependencies": {
+    "@fastify/cors": "^8.2.0",
+    "@hapi/boom": "^10.0.1",
+    "awilix": "^8.0.0",
+    "fastify": "^4.14.1",
+    "fastify-plugin": "^4.5.0",
+    "lodash": "^4.17.21",
+    "nodemon": "^2.0.21",
+    "pino": "^8.11.0"
+  },
+  "devDependencies": {
+    "pino-pretty": "^9.4.0"
+  }
+}
