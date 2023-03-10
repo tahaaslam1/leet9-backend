@@ -3,6 +3,7 @@ const pino = require("pino");
 const di = require("./di");
 const fastifyCors = require("@fastify/cors");
 const responseDecorator = require("../middleware/responseDecorator");
+const adapters = require("../adapters");
 
 module.exports = async function FastServer(options) {
   const process = options.process;
@@ -60,9 +61,11 @@ module.exports = async function FastServer(options) {
 
     const _container = _di.container();
 
-    await _di.registerDB(() => {
-      "mongoAdaptor";
-    }, true);
+    const _adapters = await adapters(_container.cradle);
+
+    // await _di.registerDB(() => {
+    //   _adapters.db;
+    // }, true);
 
     // di k naam se har jaga container utha sakty hain porey server mai
     await decorateServer("di", () => _container);
