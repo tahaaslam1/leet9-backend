@@ -1,5 +1,5 @@
 module.exports = async ({ logger, mongoose, config }) => {
-  logger.info("Initializing MongoDB Adapter >");
+  logger.info("Initializing MongoDB Adapter  >");
   const connectionString = config.DB_URI;
   try {
     await mongoose.connect(connectionString);
