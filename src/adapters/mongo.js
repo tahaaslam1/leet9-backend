@@ -1,15 +1,20 @@
-module.exports = async ({ logger, mongoose }) => {
-  logger.info("Initializing MongoDB Adapter >");
-
-  // will be saved in the config folder latere
-  const connectionString =
-    "mongodb+srv://leet9:leet912345@cluster0.ltczhj2.mongodb.net/?retryWrites=true&w=majority";
+module.exports = async ({ logger, mongoose, config }) => {
+  logger.info("Initializing MongoDB Adapter  >");
+  const connectionString = config.DB_URI;
   try {
     await mongoose.connect(connectionString);
-    console.log(mongoose.connection.readyState);
+    logger.info(mongoose.STATES[mongoose.connection.readyState]); //logs 'connected' if connection is successful
   } catch (e) {
     logger.error(e.message);
   }
 
+  const customLogger = (collectionName, method, query) => {
+    logger.info(
+      `collection : ${collectionName} \n method : ${method} \n query : ${JSON.stringify(
+        query
+      )} `
+    );
+  };
+  mongoose.set({ debug: customLogger });
   return mongoose;
 };

@@ -16,11 +16,7 @@ module.exports = async (process) => {
   }
 
   process.on("SIGINT", async () => {
-    console.log("Stopping server >");
-
     await server.fastServer.close();
-
-    console.log("Server has stopped >");
 
     process.exit(0);
   });

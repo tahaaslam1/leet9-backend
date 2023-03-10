@@ -1,9 +1,9 @@
-module.exports = function SvcTalos(opts) {
-  const { models } = opts;
+module.exports = function testService(opts) {
+  const { models,logger } = opts;
   async function test(body) {
     const note = { text: "note" };
     const newNote = await models.Note.create(note);
-    console.log(newNote);
+    // logger.info(newNote);
     return newNote;
   }
 
