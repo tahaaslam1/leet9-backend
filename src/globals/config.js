@@ -1,14 +1,7 @@
-// const path = require('path');
-// const nconf = require('nconf');
+const dotenv = require("dotenv");
 
-// nconf.env().argv();
+dotenv.config({ path: require("find-config")(".env") });
 
-// let env = nconf.get('elnv');
-
-// if (!env) env = 'debug';
-
-// console.log("Loaded Config File >", path.join(__dirname, '../env', `${env}.json`));
-
-// nconf.file({ file: path.join(__dirname, '../env', `${env}.json`) });
-
-// module.exports = nconf;
+module.exports = {
+  DB_URI: process.env.DB_URI,
+};

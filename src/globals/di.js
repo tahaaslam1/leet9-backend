@@ -2,6 +2,7 @@ const awilix = require("awilix");
 const boom = require("@hapi/boom");
 const mongoose = require("mongoose");
 const _ = require("lodash");
+const config = require("./config");
 
 const _container = awilix.createContainer();
 
@@ -18,6 +19,7 @@ module.exports = async function FastDI(options) {
   logger.info("in the di ");
 
   _container.register({
+    config: awilix.asValue(config),
     //   config: awilix.asValue(config),
     logger: awilix.asValue(logger),
     //   Joi: awilix.asValue(Joi),
@@ -42,7 +44,7 @@ module.exports = async function FastDI(options) {
         lifetime: awilix.Lifetime.SINGLETON,
         register: awilix.asFunction,
       },
-    },
+    }
   );
   const container = () => _container;
 

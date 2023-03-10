@@ -18,6 +18,7 @@ module.exports = async function FastServer(options) {
   let _server = null;
 
   const logger = pino({
+    level: "debug",
     transport: {
       target: "pino-pretty",
       options: {
@@ -73,7 +74,7 @@ module.exports = async function FastServer(options) {
     _server.setValidatorCompiler(
       ({ schema }) =>
         (data) =>
-          schema.validate(data),
+          schema.validate(data)
     );
   };
 
@@ -91,7 +92,7 @@ module.exports = async function FastServer(options) {
         const _payload = Object.assign(
           error.output.payload,
           { data: error.data },
-          { message: error.message },
+          { message: error.message }
         );
         // change "statusCode" to "code"
         _.set(_payload, "code", _code);
@@ -124,13 +125,13 @@ module.exports = async function FastServer(options) {
     try {
       await defaultInitialization();
       await _server.listen(
-        { port: 3000, host: "localhost" },
+        { port: 3000, host: "localhost" }
         // config.get("server").port,
         // config.get("server").host,
       );
     } catch (_error) {
-      console.error("Shutting Down Due To Fatal Exception >");
-      console.error("Server Initialization Error >", _error);
+      logger.error("Shutting Down Due To Fatal Exception >");
+      logger.error("Server Initialization Error >", _error);
       process.exit(1);
     }
   };
