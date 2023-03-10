@@ -1,5 +1,6 @@
 const awilix = require("awilix");
 const boom = require("@hapi/boom");
+const mongoose = require("mongoose");
 const _ = require("lodash");
 
 const _container = awilix.createContainer();
@@ -21,6 +22,8 @@ module.exports = async function FastDI(options) {
     logger: awilix.asValue(logger),
     //   Joi: awilix.asValue(Joi),
     Boom: awilix.asValue(boom),
+    mongoose: awilix.asValue(mongoose),
+
     //   _: awilix.asValue(_),
   });
 
@@ -44,7 +47,7 @@ module.exports = async function FastDI(options) {
   const container = () => _container;
 
   const registerDB = async (value) => {
-    _container.register("db", awilix.asFunction(() => value).singleton());
+    _container.register("db", awilix.asValue(value));
   };
 
   return {
